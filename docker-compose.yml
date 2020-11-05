@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+  uvicorn-gunicorn-fastapi_bankmarketingml:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: uvicorn-gunicorn-fastapi_bankmarketingml
+    ports:
+      - "80:80"
+    networks:
+      node_net:
+        ipv4_address: 100.21.200.42
+
+networks:
+  node_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "100.21.200.42/16"
