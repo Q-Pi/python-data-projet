@@ -1,1 +1,2 @@
-sensible-browser https://iris-wrvlyi5jgq-ew.a.run.app
+sensible-browser https://bankmarketingml-wtvijbjlpq-ew.a.run.app
+

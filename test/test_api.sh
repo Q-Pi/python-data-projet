@@ -1,1 +1,1 @@
-curl -v http://localhost:80/api
+curl -v https://bankmarketingml-wtvijbjlpq-ew.a.run.app/

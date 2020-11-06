@@ -1,0 +1,25 @@
+API's routes:
+
+HOME: redirect
+@app.get('/')
+
+Models list:
+@app.get('/models', response_class=HTMLResponse)
+
+Models:
+@app.get('/model/1', response_class=HTMLResponse)
+@app.get('/model/2', response_class=HTMLResponse)
+
+Predict:
+@app.get('/model/1/predict', response_class=HTMLResponse)
+@app.get('/model/2/predict', response_class=HTMLResponse)
+
+@app.post('/model/1/predict')
+@app.post('/model/2/predict')
+
+Result:
+@app.get('/model/1/result/{data}', response_class=HTMLResponse)
+@app.get('/model/2/result/{data}', response_class=HTMLResponse)
+
+DB:
+@app.get('/csv_to_db', response_class=HTMLResponse)

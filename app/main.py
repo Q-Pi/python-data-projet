@@ -49,25 +49,26 @@ def index():
 async def models(request: Request):
 	html = "<h1>Modèles :</h1>"
 	html += "<a href=\"model/1\">RandomForest</a>"
+	html += "<br></br>"
 	html += "<a href=\"model/2\">DecisionTree</a>"
 	return html
 
 @app.get('/model/1', response_class=HTMLResponse)
-def models():
+def model_1():
 	html = "<h1>RandomForest :</h1>"
 	html += "<h2>n_estiamtors=250</h2>"
-	html += "<a href=\"model/1/predict\">Prédire</a>"
+	html += "<a href=\"/model/1/predict\">Prédire</a>"
 	return html
 
 @app.get('/model/2', response_class=HTMLResponse)
-def models():
+def model_2():
 	html = "<h1>DecisionTree :</h1>"
 	html += "<h2>max_depth=7</h2>"
-	html += "<a href=\"model/2/predict\">Prédire</a>"
+	html += "<a href=\"/model/2/predict\">Prédire</a>"
 	return html
 
 @app.get('/model/1/predict', response_class=HTMLResponse)
-def api():
+def model_1_predict():
 	selected_features = load("ML/utils/joblibs/selected_features.joblib")
 	features_type = load("ML/utils/joblibs/features_type.joblib")
 	html = "<p>Features</p>"
@@ -80,7 +81,7 @@ def api():
 	return html
 
 @app.get('/model/2/predict', response_class=HTMLResponse)
-def api():
+def model_2_predict():
 	selected_features = load("ML/utils/joblibs/selected_features.joblib")
 	features_type = load("ML/utils/joblibs/features_type.joblib")
 	html = "<p>Features</p>"
@@ -93,7 +94,7 @@ def api():
 	return html
 
 @app.post('/model/1/predict')
-async def api_post(request: Request):
+async def model_1_predict_post(request: Request):
 	data = []
 	form_data = await request.form()
 	for each in form_data:
@@ -101,7 +102,7 @@ async def api_post(request: Request):
 	return RedirectResponse(url='/model/1/result/'+str(predict(data, 1)), status_code=status.HTTP_303_SEE_OTHER)
 
 @app.post('/model/2/predict')
-async def api_post(request: Request):
+async def model_2_predict_post(request: Request):
 	data = []
 	form_data = await request.form()
 	for each in form_data:
@@ -109,7 +110,7 @@ async def api_post(request: Request):
 	return RedirectResponse(url='/model/2/result/'+str(predict(data, 2)), status_code=status.HTTP_303_SEE_OTHER)
 
 @app.get('/model/1/result/{data}', response_class=HTMLResponse)
-def result(data: str = None):
+def model_1_result(data: str = None):
 	data = data[1:-1]
 	data = data.split("+")
 	html = "<h1>Resultat : {}</h1>".format('Non' if data.index(max(data)) == 0 else 'Oui')
@@ -118,10 +119,14 @@ def result(data: str = None):
 	return html
 
 @app.get('/model/2/result/{data}', response_class=HTMLResponse)
-def result(data: str = None):
+def model_2_result(data: str = None):
 	data = data[1:-1]
 	data = data.split("+")
 	html = "<h1>Resultat : {}</h1>".format('Non' if data.index(max(data)) == 0 else 'Oui')
 	html += "<p>{} : {}</p>".format('Non', data[0])
 	html += "<p>{} : {}</p>".format('Oui', data[1])
 	return html
+
+@app.get('/csv_to_db', response_class=HTMLResponse)
+def csv_to_db():
+	csv_to_db()

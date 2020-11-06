@@ -10,6 +10,20 @@ services:
     networks:
       node_net:
         ipv4_address: 100.21.200.42
+  pgdb:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    env_file:
+      - database.env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    networks: 
+      node_net:
+        ipv4_address: 100.21.200.40
+
+volumes:
+  database-data:
 
 networks:
   node_net:
