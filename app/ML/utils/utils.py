@@ -106,18 +106,17 @@ def csv_to_db():
 
 def db_to_csv():
 	query = "SELECT * FROM customer"
-
-    HOST = "localhost"
+	HOST = "localhost"
 	USER = "postgres"
 	PASSWORD = "password"
 	DATABASE = "marketing"
 	conn = psycopg2.connect("host={} dbname={} user={} password={}".format(HOST, DATABASE, USER, PASSWORD))
 	cur = conn.cursor()
 
-    SQL_for_file_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(s)
+	SQL_for_file_output = "COPY ({0}) TO STDOUT WITH CSV HEADER".format(s)
 
-    file = Open('data/dump.csv', 'w')
-    cur.copy_expert(SQL_for_file_output, file)
+	file = Open('data/dump.csv', 'w')
+	cur.copy_expert(SQL_for_file_output, file)
 
-    db_cursor.close()
-    db_conn.close()
+	db_cursor.close()
+	db_conn.close()

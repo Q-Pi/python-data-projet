@@ -7,6 +7,7 @@ from fastapi import Request
 from fastapi import status
 
 from pydantic import BaseModel
+import ML.utils as utils
 
 #features = 		['age', 	'job', 	'marital', 	'education', 'balance', 'housing', 	'contact', 	'duration', 'campaign', 'pdays',  'previous','poutcome']
 #features_type = 	['number', 	'text', 'text', 	'text', 	 'number', 	'bool', 	'text', 	'number', 	'number', 	'number', 'number',  'text']
@@ -129,4 +130,8 @@ def model_2_result(data: str = None):
 
 @app.get('/csv_to_db', response_class=HTMLResponse)
 def csv_to_db():
-	csv_to_db()
+	utils.csv_to_db()
+
+@app.get('/csv_to_db', response_class=HTMLResponse)
+def db_to_csv():
+	utils.db_to_csv()

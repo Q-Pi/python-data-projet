@@ -3,6 +3,7 @@ CI/CD - GCP :
 
 $(gcloud config list --format='value(core.project)')
 
+PROJECT_ID=bankmarketingml
 
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
 
